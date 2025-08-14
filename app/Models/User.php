@@ -11,5 +11,12 @@ class User extends Authenticatable
 
     protected $fillable = ['name', 'email', 'password', 'role'];
     protected $hidden = ['password'];
+
+    public function komentar()
+{
+    return $this->hasMany(Komentar::class);
 }
+}
+
+
 

@@ -20,5 +20,11 @@ class Book extends Model
     'summary',
 ];
 
+public function komentar()
+{
+    return $this->hasMany(Komentar::class);
+}
+
+
 }
 

@@ -5,6 +5,7 @@ use App\Http\Controllers\BookController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\DashboarduserController;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\API\KomentarController;
 
 Route::get('/', function () {
     return view('index');
@@ -34,7 +35,12 @@ Route::prefix('user')->name('user.')->middleware('auth')->group(function () {
 
 });
 
+Route::post('/admin/books/mass-destroy', [BookController::class, 'massDestroy'])->name('admin.books.massDestroy');
 
 
-
+Route::middleware('auth')->group(function () {
+    Route::get('/books/{book_id}/comments', [KomentarController::class, 'index']);
+    Route::post('/books/{book_id}/comments', [KomentarController::class, 'store']);
+    Route::delete('/komentar/{id}', [KomentarController::class, 'destroy']);
+});
 

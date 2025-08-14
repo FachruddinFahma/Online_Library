@@ -11,15 +11,15 @@ return new class extends Migration
         Schema::create('books', function (Blueprint $table) {
             $table->id();
 
-            $table->string('name');                   // Judul buku
-            $table->year('year');                    // Tahun terbit
-            $table->string('author');                // Penulis
-            $table->string('publisher');             // Penerbit
-            $table->integer('pageCount');            // Jumlah halaman
-            $table->string('genre');                 // Genre buku (WAJIB)
-            $table->string('cover')->nullable();     // Gambar cover (optional)
-            $table->text('summary')->nullable();     // Ringkasan buku (optional)
-            $table->timestamps(); // created_at & updated_at
+            $table->string('name');      
+            $table->year('year');         
+            $table->string('author');
+            $table->string('publisher');             
+            $table->integer('pageCount');            
+            $table->string('genre');                 
+            $table->string('cover')->nullable();    
+            $table->text('summary')->nullable();    
+            $table->timestamps(); 
         });
     }
 

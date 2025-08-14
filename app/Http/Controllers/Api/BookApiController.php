@@ -26,7 +26,7 @@
                 'pageCount' => 'required|integer',
                 'genre' => 'required|string|max:100',
                 'summary' => 'nullable|string',
-                'cover' => 'nullable|file|image|max:2048', // max 2MB
+                'cover' => 'nullable|file|image|max:10248', // max 2MB
             ]);
 
             if ($validator->fails()) {
@@ -115,4 +115,27 @@
             $book->delete();
             return response()->json(['message' => 'Deleted']);
         }
+
+        public function massDestroy(Request $request)
+{
+    $ids = $request->ids;
+
+    if (!is_array($ids) || empty($ids)) {
+        return response()->json(['message' => 'IDs tidak valid'], 422);
+    }
+
+    // Hapus cover dulu supaya filenya terhapus juga
+    $books = Book::whereIn('id', $ids)->get();
+    foreach ($books as $book) {
+        if ($book->cover) {
+            Storage::disk('public')->delete($book->cover);
+        }
+    }
+
+    // Hapus data buku
+    Book::whereIn('id', $ids)->delete();
+
+    return response()->json(['message' => 'Buku berhasil dihapus secara massal']);
+}
+
     }

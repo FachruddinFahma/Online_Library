@@ -35,7 +35,7 @@ class BookController extends Controller
         'publisher' => 'required|string',
         'pageCount' => 'required|integer|min:1',
         'genre' => 'required|string',
-        'cover' => 'nullable|image|mimes:jpg,jpeg,png|max:2048',
+        'cover' => 'nullable|image|mimes:jpg,jpeg,png|max:10248',
     ]);
 
     // Simpan file cover (jika ada)
@@ -116,6 +116,17 @@ public function edit($id)
     $book->delete();
 
     return response()->json(['message' => 'Buku berhasil dihapus'], 200);
+}
+
+
+public function massDestroy(Request $request)
+{
+    $ids = $request->input('ids', []);
+    if (!empty($ids)) {
+        Book::whereIn('id', $ids)->delete();
+        return response()->json(['message' => 'Buku terpilih berhasil dihapus']);
+    }
+    return response()->json(['message' => 'Tidak ada buku yang dihapus'], 400);
 }
 
 }
