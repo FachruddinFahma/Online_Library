@@ -11,6 +11,6 @@
     Route::delete('books/{id}', [BookApiController::class, 'destroy']);
     Route::post('books/mass-destroy', [BookApiController::class, 'massDestroy']);
 
-    Route::get('/books/{book_id}/comments', [KomentarController::class, 'index']);
-    Route::post('/books/{book_id}/comments', [KomentarController::class, 'store']);
-    Route::delete('/komentar/{id}', [KomentarController::class, 'destroy']);
+    // Route::get('/books/{book_id}/comments', [KomentarController::class, 'index']);
+    // Route::post('/books/{book_id}/comments', [KomentarController::class, 'store']);
+    // Route::delete('/komentar/{id}', [KomentarController::class, 'destroy']);
